@@ -1,0 +1,13 @@
+{
+  "name": "Project",
+  "host": "127.0.0.1",
+  "port": 8000,
+  "slug": "{{ cookiecutter.name|lower|replace(' ', '-')|replace('-', '_') }}",
+  "app_name": "Demo",
+  "app_slug": "{{ cookiecutter.app_name|lower|replace(' ', '-')|replace('-', '_') }}",
+  "use_user_auth": true,
+  "use_scheduler": true,
+  "use_alembic": false,
+  "language": "en_US",
+  "secret_key": ""
+}

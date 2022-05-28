@@ -1,0 +1,4 @@
+{
+  "name": "Demo",
+  "slug": "{{ cookiecutter.name|lower|replace(' ', '-')|replace('-', '_') }}"
+}
