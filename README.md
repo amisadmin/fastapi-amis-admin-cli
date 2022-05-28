@@ -24,6 +24,8 @@ faa new project_name --init
 # 初始化一个`FastAPI-Amis-Admin`应用
 faa new app_name
 
+# 快速运行项目
+faa run
 ```
 
 ## 相关项目
