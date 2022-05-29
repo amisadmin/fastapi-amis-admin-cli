@@ -11,17 +11,18 @@ echo "----------------------------------"
 read input
 project_dir=backend
 port={{cookiecutter.port}}
+venv=venv/bin/activate
 time=`date '+%Y-%m-%d'`
 case $input in
 0)
-  source venv/bin/activate
+  source $venv
   cd $project_dir
   uvicorn main:app --port $port --reload
 
   sleep 1
   ;;
 1)
-  source venv/bin/activate
+  source $venv
   cd $project_dir
   nohup uvicorn main:app --port $port >../out-$time.log &
 
@@ -34,14 +35,14 @@ case $input in
   ;;
 3)
   virtualenv venv --python=python
-  source venv/bin/activate
+  source $venv
   pip install -r $project_dir'requirements.txt'
 
   sleep 1
   ;;
 
 4)
-  source venv/bin/activate
+  source $venv
   cd $project_dir
   alembic revision --autogenerate
   alembic upgrade head
