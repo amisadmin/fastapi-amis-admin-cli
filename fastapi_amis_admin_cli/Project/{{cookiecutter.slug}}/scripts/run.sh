@@ -37,7 +37,7 @@ case $input in
   virtualenv venv --python=python
   source $venv
   cd $project_dir
-  pip install -r 'requirements.txt'
+  pip install -r requirements.txt
 
   sleep 1
   ;;
