@@ -1,4 +1,4 @@
-# {{ cookiecutter.name }}
+# {{ cookiecutter.name|capitalize }}
 
 ## Develop
 

@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 class Settings(AmisSettings):
-    name: str = '{{ cookiecutter.name }}'
+    name: str = '{{ cookiecutter.name|capitalize }}'
     host: str = '{{ cookiecutter.host }}'
     port: int = {{cookiecutter.port}}
     secret_key: str = ''
