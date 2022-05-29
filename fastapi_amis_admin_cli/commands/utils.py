@@ -4,7 +4,7 @@ import locale
 import os
 import sys
 from pathlib import Path
-from typing import Optional, List, TypeVar, Dict, Any
+from typing import Optional, List, TypeVar, Dict, Any, Union
 
 import typer
 from click import Choice
@@ -62,7 +62,7 @@ def get_backend_path(must: bool = False) -> Optional[Path]:
     return path
 
 
-def check_requirement(name: str, install: Optional[str, bool] = False) -> bool:
+def check_requirement(name: str, install: Union[str, bool] = False) -> bool:
     try:
         importlib.import_module(name)
         return True
