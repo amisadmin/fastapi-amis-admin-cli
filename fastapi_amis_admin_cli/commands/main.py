@@ -2,10 +2,11 @@ import os
 from pathlib import Path
 from typing import Optional
 
-import fastapi_amis_admin_cli
 import typer
+
+import fastapi_amis_admin_cli
 from fastapi_amis_admin_cli.commands.project import new_project, new_app
-from fastapi_amis_admin_cli.commands.utils import get_settings, get_backend_path
+from fastapi_amis_admin_cli.commands.utils import get_settings, get_backend_path, check_requirement
 
 app = typer.Typer(no_args_is_help=True)
 
@@ -39,6 +40,7 @@ def run(ctx: typer.Context):
     Run The FastAPI-Amis-Admin Server.
     To see the complete set of available options, use `uvicorn --help`.
     """
+    check_requirement('uvicorn', install=True)
     args = ctx.args.copy()
     if args and args[0] == '--help':
         return os.system('uvicorn ' + ' '.join(args))

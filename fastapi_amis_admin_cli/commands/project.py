@@ -5,20 +5,22 @@ import typer
 from cookiecutter.main import cookiecutter
 
 from fastapi_amis_admin_cli import BASE_PATH
-from fastapi_amis_admin_cli.commands.utils import get_language, get_backend_path
+from fastapi_amis_admin_cli.commands.utils import get_language, get_backend_path, check_requirement
 
 
 def new_project(name: str, out: str = None, **kwargs):
-    context={
-            "name": name,
-            "port": typer.prompt("The project port?", default=8000, type=int),
-            "use_user_auth": typer.confirm("Do you want to use `FastAPI-User-Auth`?", default=True),
-            "use_scheduler": typer.confirm("Do you want to use `FastAPI-Scheduler`?", default=True),
-            "language": get_language(),
-            "secret_key": ''.join(random.choices(string.ascii_lowercase + string.digits, k=64)),
-            **kwargs
-        }
-    print('context',context)
+    context = {
+        "name": name,
+        "port": typer.prompt("The project port?", default=8000, type=int),
+        "use_user_auth": typer.confirm("Do you want to use `FastAPI-User-Auth`?", default=True)
+                         and check_requirement('fastapi_user_auth', install=True),
+        "use_scheduler": typer.confirm("Do you want to use `FastAPI-Scheduler`?", default=True)
+                         and check_requirement('fastapi_scheduler', install=True),
+        "language": get_language(),
+        "secret_key": ''.join(random.choices(string.ascii_lowercase + string.digits, k=64)),
+        **kwargs
+    }
+
     cookiecutter(
         template=str((BASE_PATH / 'Project').resolve()),
         no_input=True,

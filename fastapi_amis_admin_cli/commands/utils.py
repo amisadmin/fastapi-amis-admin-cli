@@ -60,3 +60,15 @@ def get_backend_path(must: bool = False) -> Optional[Path]:
             else:
                 typer.secho("Cannot find backend in current folder!", fg=typer.colors.RED)
     return path
+
+
+def check_requirement(name: str, install: Optional[str, bool] = False) -> bool:
+    try:
+        importlib.import_module(name)
+        return True
+    except ImportError:
+        if install:
+            name = name if install is True else install
+            os.system(f'pip install {name}')
+            return True
+        return False
