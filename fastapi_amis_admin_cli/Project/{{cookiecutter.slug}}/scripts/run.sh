@@ -34,7 +34,7 @@ case $input in
   sleep 1
   ;;
 3)
-  virtualenv venv --python=python
+  virtualenv venv --python=python3
   source $venv
   cd $project_dir
   pip install -r requirements.txt
