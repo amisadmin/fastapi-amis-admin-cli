@@ -2,6 +2,10 @@
 
 ## Develop
 
+### Install command line extension
+
+`pip install fastapi_amis_admin[cli]`
+
 ### How to start
 
 1. create your app using `faa new app_name` .
