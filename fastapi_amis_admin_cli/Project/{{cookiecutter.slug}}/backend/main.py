@@ -7,8 +7,8 @@ from core.settings import settings
 app = FastAPI(debug=settings.debug)
 
 # 安装应用
-from apps import {{cookiecutter.app_slug}}
-{{cookiecutter.app_slug}}.setup(app)
+from apps import {{ cookiecutter.app_slug }}
+{{ cookiecutter.app_slug }}.setup(app)
 
 # 挂载后台管理系统
 site.mount_app(app)
@@ -16,16 +16,14 @@ site.mount_app(app)
 
 @app.on_event("startup")
 async def startup():
-
-{% if cookiecutter.use_user_auth==True %}
+{% if cookiecutter.use_user_auth == "True" %}
     from core.adminsite import auth
     await site.create_db_and_tables()
     await auth.create_role_user(role_key='admin')
     await auth.create_role_user(role_key='vip')
     await auth.create_role_user(role_key='test')
 {% endif %}
-
-{% if cookiecutter.use_scheduler==True %}
+{% if cookiecutter.use_scheduler == "True" %}
     from core.adminsite import scheduler
     scheduler.start()
 {% else %}
