@@ -1,6 +1,5 @@
-from fastapi_amis_admin import amis
-from fastapi_amis_admin import amis_admin as admin
-from fastapi_amis_admin.amis_admin.admin import AdminApp
+from fastapi_amis_admin import amis,admin
+from fastapi_amis_admin.admin import AdminApp
 
 from core.adminsite import site
 # from .models import Category

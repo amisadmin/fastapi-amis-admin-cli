@@ -6,7 +6,7 @@ from fastapi_user_auth.site import AuthAdminSite
 site = AuthAdminSite(settings)
 auth = site.auth
 {% else %}
-from fastapi_amis_admin.amis_admin import AdminSite
+from fastapi_amis_admin.admin import AdminSite
 
 site = AdminSite(settings)
 {% endif %}

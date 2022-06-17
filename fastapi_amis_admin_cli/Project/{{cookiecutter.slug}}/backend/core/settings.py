@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 from typing import List
 
-from fastapi_amis_admin.amis_admin.settings import Settings as AmisSettings
+from fastapi_amis_admin.admin.settings import Settings as AmisSettings
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
