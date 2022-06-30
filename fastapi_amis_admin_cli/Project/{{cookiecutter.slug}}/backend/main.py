@@ -1,5 +1,6 @@
 from starlette.responses import RedirectResponse
 from fastapi import FastAPI
+from sqlmodel import SQLModel
 
 from core.adminsite import site
 from core.settings import settings
@@ -18,7 +19,7 @@ site.mount_app(app)
 async def startup():
 {% if cookiecutter.use_user_auth == "True" %}
     from core.adminsite import auth
-    await site.create_db_and_tables()
+    await site.db.async_run_sync(SQLModel.metadata.create_all, is_session=False)
     await auth.create_role_user(role_key='admin')
     await auth.create_role_user(role_key='vip')
     await auth.create_role_user(role_key='test')
