@@ -27,6 +27,7 @@ def new_project(name: str, out: str = None, **kwargs):
         extra_context=context,
         output_dir=(out or '.'),
     )
+    get_backend_path.cache_clear()
 
 
 def new_app(name: str, out: str = None, **kwargs):
