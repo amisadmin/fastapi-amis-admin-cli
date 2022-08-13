@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-router = APIRouter(prefix='/{{cookiecutter.slug}}', tags=['{{cookiecutter.name}}'])
+router = APIRouter()
 
 
 @router.get('/hello')

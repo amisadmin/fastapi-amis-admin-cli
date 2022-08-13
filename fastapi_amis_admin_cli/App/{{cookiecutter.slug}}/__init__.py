@@ -8,5 +8,5 @@ def setup(app: FastAPI):
     from . import jobs
     # 3. 注册普通路由
     from . import apis
-    app.include_router(apis.router)
+    app.include_router(apis.router, prefix='/{{cookiecutter.slug}}', tags=['{{cookiecutter.name}}'])
 
