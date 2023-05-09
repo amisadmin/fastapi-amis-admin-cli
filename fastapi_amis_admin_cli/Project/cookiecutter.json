@@ -1,5 +1,5 @@
 {
-  "name": "Project",
+  "name": "AmisAdminProject",
   "host": "127.0.0.1",
   "port": 8000,
   "slug": "{{ cookiecutter.name|lower|replace(' ', '-')|replace('-', '_') }}",

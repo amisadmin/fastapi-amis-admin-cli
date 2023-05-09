@@ -1,12 +1,13 @@
-from fastapi import FastAPI
+from fastapi import APIRouter
+from fastapi_amis_admin.admin import AdminApp
 
 
-def setup(app: FastAPI):
-    # 1. 导入管理应用
-    from . import admin
-    # 2. 导入定时任务
-    from . import jobs
-    # 3. 注册普通路由
-    from . import apis
-    app.include_router(apis.router, prefix='/{{cookiecutter.slug}}', tags=['{{cookiecutter.name}}'])
+def setup(router: APIRouter, admin_app: AdminApp, **kwargs):
+    # 导入相关模块
+    from . import admin, apis, jobs
+
+    # 注册路由
+    router.include_router(apis.router, prefix='/{{cookiecutter.slug}}', tags=['{{cookiecutter.name}}'])
+    # 注册管理页面
+    admin_app.register_admin(admin.{{cookiecutter.slug|capitalize}}App)
 

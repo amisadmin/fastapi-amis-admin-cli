@@ -11,18 +11,24 @@ from click import Choice
 
 
 def get_language() -> str:
-    language = os.getenv('LANGUAGE') or os.getenv('LANG') or locale.getdefaultlocale()[0]
-    return 'zh_CN' if language.lower().startswith('zh') else 'en_US'
+    language = os.getenv('LANGUAGE') or os.getenv('LANG') or locale.getdefaultlocale()[0] or "en_US"
+    return 'zh_CN' if language.lower().startswith('zh') else language
 
 
+@functools.lru_cache()
 def get_settings() -> Dict[str, Any]:
     backend = get_backend_path(must=True)
-    sys.path.append(str(backend.resolve()))
+    sys.path.append(str(backend))
+    os.chdir(backend)  # 切换到backend目录
     try:
-        settings = importlib.import_module('core.settings')
+        module = importlib.import_module('core.settings')
     except ImportError as e:
         return {}
-    return settings.settings.dict()
+    return module.settings.dict()
+
+
+def get_setting_value(key: str, default: Any = None) -> Any:
+    return get_settings().get(key, default)
 
 
 _VT = TypeVar("_VT")
@@ -46,7 +52,7 @@ def list_prompt(text: str, lst: List[_VT], default: _VT = None, **kwargs) -> _VT
 def get_backend_path(must: bool = False) -> Optional[Path]:
     path = Path('.')
     if (path / "core/__init__.py").is_file() and str(path.resolve()).endswith('backend'):
-        return path
+        return path.resolve()
     lst = [
         p.parent.parent for p in path.glob("**/backend/core/__init__.py")
         if p.is_file() and '{{cookiecutter.slug}}' not in str(p)
@@ -59,7 +65,7 @@ def get_backend_path(must: bool = False) -> Optional[Path]:
                 break
             else:
                 typer.secho("Cannot find backend in current folder!", fg=typer.colors.RED)
-    return path
+    return path.resolve() if path else None
 
 
 def check_requirement(name: str, install: Union[str, bool] = False) -> bool:
@@ -72,3 +78,16 @@ def check_requirement(name: str, install: Union[str, bool] = False) -> bool:
             os.system(f'pip install {name}')
             return True
         return False
+
+
+def kill_port(port):
+    import psutil
+
+    for proc in psutil.process_iter():
+        if proc.name().find("python") == -1:
+            continue
+        for conns in proc.connections(kind="inet"):
+            if conns.laddr.port == port:
+                proc.kill()
+                return proc
+    return None

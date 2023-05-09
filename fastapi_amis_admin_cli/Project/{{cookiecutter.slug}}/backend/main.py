@@ -9,7 +9,7 @@ app = FastAPI(debug=settings.debug)
 
 # 安装应用
 from apps import {{ cookiecutter.app_slug }}
-{{ cookiecutter.app_slug }}.setup(app)
+{{ cookiecutter.app_slug }}.setup(app.router,site)
 
 # 挂载后台管理系统
 site.mount_app(app)
@@ -20,9 +20,7 @@ async def startup():
 {% if cookiecutter.use_user_auth == "True" %}
     from core.adminsite import auth
     await site.db.async_run_sync(SQLModel.metadata.create_all, is_session=False)
-    await auth.create_role_user(role_key='admin')
-    await auth.create_role_user(role_key='vip')
-    await auth.create_role_user(role_key='test')
+    await auth.create_role_user('admin')
 {% endif %}
 {% if cookiecutter.use_scheduler == "True" %}
     from core.adminsite import scheduler

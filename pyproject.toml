@@ -34,13 +34,14 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
 ]
 dependencies = [
-    "typer",
-    "cookiecutter",
+    "typer>=0.9.0",
+    "cookiecutter>=2.1.1",
+    "psutil>=5.9.5",
 ]
 
 [project.urls]
-Source = "https://github.com/amisadmin/fastapi_amis_admin_cli"
-FastAPI-Amis-Admin = "https://github.com/amisadmin/fastapi_amis_admin"
+Source = "https://github.com/amisadmin/fastapi-amis-admin-cli"
+FastAPI-Amis-Admin = "https://github.com/amisadmin/fastapi-amis-admin"
 
 [project.optional-dependencies]
 test = [

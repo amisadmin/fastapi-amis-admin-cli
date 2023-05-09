@@ -1,11 +1,9 @@
-from fastapi_amis_admin import amis,admin
+from fastapi_amis_admin import amis, admin
 from fastapi_amis_admin.admin import AdminApp
 
-from core.adminsite import site
 # from .models import Category
 
 
-@site.register_admin
 class {{cookiecutter.slug|capitalize}}App(admin.AdminApp):
     page_schema = amis.PageSchema(label='{{cookiecutter.name|capitalize}}', icon='fa fa-bolt')
     router_prefix = '/{{cookiecutter.slug}}'
@@ -18,7 +16,6 @@ class {{cookiecutter.slug|capitalize}}App(admin.AdminApp):
 # Register your models here.
 
 # class CategoryAdmin(admin.ModelAdmin):
-#     group_schema = None
 #     page_schema = amis.PageSchema(label='Category', icon='fa fa-folder')
 #     model = Category
 #     search_fields = [Category.name]
