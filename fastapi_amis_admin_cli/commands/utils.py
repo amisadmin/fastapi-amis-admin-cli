@@ -3,6 +3,7 @@ import importlib
 import locale
 import os
 import sys
+import time
 from pathlib import Path
 from typing import Optional, List, TypeVar, Dict, Any, Union
 
@@ -83,11 +84,14 @@ def check_requirement(name: str, install: Union[str, bool] = False) -> bool:
 def kill_port(port):
     import psutil
 
-    for proc in psutil.process_iter():
-        if proc.name().find("python") == -1:
-            continue
-        for conns in proc.connections(kind="inet"):
-            if conns.laddr.port == port:
-                proc.kill()
+    for conn in psutil.net_connections(kind='inet'):
+        if conn.laddr.port == port:
+            try:
+                proc = psutil.Process(conn.pid)
+                if proc:
+                    proc.kill()
+                    time.sleep(1)
                 return proc
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                pass
     return None
