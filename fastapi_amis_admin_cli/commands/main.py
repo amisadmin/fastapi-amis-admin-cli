@@ -1,4 +1,5 @@
 import os
+import time
 from pathlib import Path
 
 import typer
@@ -6,7 +7,7 @@ from typing_extensions import Annotated
 
 import fastapi_amis_admin_cli
 from fastapi_amis_admin_cli.commands.project import new_project, new_app
-from fastapi_amis_admin_cli.commands.utils import get_setting_value, check_requirement, kill_port
+from fastapi_amis_admin_cli.commands.utils import get_setting_value, check_requirement, find_process_by_port
 
 app = typer.Typer(no_args_is_help=True)
 
@@ -66,11 +67,13 @@ def stop(
 ):
     """Stop Uvicorn Application"""
     while True:
-        proc = kill_port(port)
+        proc = find_process_by_port(port)
         if not proc:
             typer.echo(f"The process with port {port} was not found")
             break
-        typer.echo(f"The process({proc.name()}) at port {port} has been shut down")
+        typer.echo(f"Shutting down the process({proc.name()}) on port {port}")
+        proc.kill()
+        time.sleep(0.5)
 
 
 @app.command()

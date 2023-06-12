@@ -3,7 +3,6 @@ import importlib
 import locale
 import os
 import sys
-import time
 from pathlib import Path
 from typing import Optional, List, TypeVar, Dict, Any, Union
 
@@ -80,17 +79,14 @@ def check_requirement(name: str, install: Union[str, bool] = False) -> bool:
             return True
         return False
 
-
-def kill_port(port):
+def find_process_by_port(port):
+    """根据端口号查找进程"""
     import psutil
 
     for conn in psutil.net_connections(kind='inet'):
         if conn.laddr.port == port:
             try:
                 proc = psutil.Process(conn.pid)
-                if proc:
-                    proc.kill()
-                    time.sleep(1)
                 return proc
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                 pass
