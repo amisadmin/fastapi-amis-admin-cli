@@ -12,7 +12,7 @@ maintainers = [
 ]
 description = "FastAPI-Amis-Admin-Cli is an extended library for quickly building `FastAPI-Amis-Admin` projects."
 readme = "README.md"
-requires-python = ">=3.6.1"
+requires-python = ">=3.7"
 dynamic = ["version"]
 keywords = [
     "fastapi-amis-admin-cli",

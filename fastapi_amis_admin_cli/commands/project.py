@@ -1,11 +1,14 @@
 import random
 import string
+from pathlib import Path
 
 import typer
 from cookiecutter.main import cookiecutter
 
-from fastapi_amis_admin_cli import BASE_PATH
 from fastapi_amis_admin_cli.commands.utils import get_language, get_backend_path, check_requirement
+
+
+BASE_PATH = Path(__file__).parent.parent
 
 
 def new_project(name: str, out: str = None, **kwargs):

@@ -2,19 +2,20 @@
 # PEP 621 project metadata
 # See https://www.python.org/dev/peps/pep-0621/
 name = "{{ cookiecutter.name }}"
-version = "2022.9.4"
+version = "2023.9.15"
 requires-python = ">=3.8"
 authors = [
     { email = "1456417373@qq.com" },
     { name = "Atomi" }
 ]
 dependencies = [
-    "fastapi>=0.95.0",
     "uvicorn>=0.18.3",
-    "pydantic[dotenv]>=1.9.0",
-    "aiosqlite>=0.17.0",
-    "fastapi-amis-admin>=0.5.6",
-    {% if cookiecutter.use_user_auth == "True" %}"fastapi-user-auth>=0.5.0,<0.6.0"{% endif %}
+    "pydantic[dotenv]>=1.10.0,<2.0.0",
+    "aiosqlite>=0.15.0",
+    "fastapi-amis-admin[cli]<0.7.0,>=0.6.5",
+    "sqlmodelx>=0.0.5",
+    "alembic>=1.7.6",
+    {% if cookiecutter.use_user_auth == "True" %}"fastapi-user-auth>=0.6.0,<0.7.0"{% endif %}
     {% if cookiecutter.use_scheduler == "True" %}"fastapi-scheduler>=0.0.6,<0.1.0"{% endif %}
 ]
 
@@ -30,11 +31,9 @@ dev = [
 ]
 
 [tool.pdm.scripts]
-_.env_file = "./backend/.env"
+#_.env_file = "./backend/.env"
 run = "faa run"
 stop = "faa stop"
-start = { shell = "nohup pdm run run >/dev/null 2>&1 &" }
-restart = { composite = ["stop", "start"] }
 lint = "pre-commit run --all-files"
 test = "pytest"
 

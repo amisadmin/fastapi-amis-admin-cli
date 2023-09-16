@@ -20,16 +20,6 @@ See [Docs](https://docs.amis.work/)
 
 ### Install and run:
 
-- Use pip to install
-
-```shell
-# 1.Change to the project root directory
-cd ./{{ cookiecutter.slug }}/backend
-# 2.Install dependencies.(Recommend to use virtual environment)
-pip3 install -r requirements.txt
-# 3.Run server.
-faa run
-```
 
 - Use [pdm](https://pdm.fming.dev/latest/) to install
 

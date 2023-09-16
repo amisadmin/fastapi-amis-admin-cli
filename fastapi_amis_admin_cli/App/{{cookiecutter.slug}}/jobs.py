@@ -1,6 +1,6 @@
 # from datetime import datetime
 #
-# from core.adminsite import scheduler
+# from core.globals import scheduler
 
 
 # # use when you want to run the job at fixed intervals of time

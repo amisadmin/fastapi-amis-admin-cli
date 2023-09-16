@@ -5,12 +5,9 @@ from fastapi_amis_admin.models import Field
 
 # Create your models here.
 
-class BaseSQLModel(sqlmodel.SQLModel):
-    id: int = Field(default=None, primary_key=True, nullable=False)
-
-
 # class Category(BaseSQLModel, table=True):
 #     __tablename__ = 'blog_category'
+#     id: int = Field(default=None, primary_key=True, nullable=False)
 #     name: str = Field(
 #         title='Category Name',
 #         sa_column=sqlmodel.Column(sqlmodel.String(100), unique=True, index=True, nullable=False)
