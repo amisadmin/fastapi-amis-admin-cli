@@ -10,12 +10,12 @@ authors = [
 ]
 dependencies = [
     "uvicorn>=0.18.3",
-    "pydantic[dotenv]>=1.10.0,<2.0.0",
+    "pydantic[dotenv]>=1.9.0",
     "aiosqlite>=0.15.0",
-    "fastapi-amis-admin[cli]<0.7.0,>=0.6.5",
-    "sqlmodelx>=0.0.5",
+    "fastapi-amis-admin[cli]>=0.6.5",
+    "sqlmodel>=0.0.14",
     "alembic>=1.7.6",
-    {% if cookiecutter.use_user_auth == "True" %}"fastapi-user-auth>=0.6.0,<0.7.0"{% endif %}
+    {% if cookiecutter.use_user_auth == "True" %}"fastapi-user-auth>=0.6.0"{% endif %}
     {% if cookiecutter.use_scheduler == "True" %}"fastapi-scheduler>=0.0.6,<0.1.0"{% endif %}
 ]
 

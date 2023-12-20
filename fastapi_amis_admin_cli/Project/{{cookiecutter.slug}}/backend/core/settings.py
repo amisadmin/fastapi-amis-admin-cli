@@ -1,7 +1,7 @@
 import os
 import sys
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 from fastapi_amis_admin.admin.settings import Settings as AmisSettings
 
@@ -13,7 +13,7 @@ class Settings(AmisSettings):
     host: str = '{{ cookiecutter.host }}'
     port: int = {{cookiecutter.port}}
     secret_key: str = ''
-    allow_origins: List[str] = None
+    allow_origins: Optional[List[str]] = None
 
 # 设置FAA_GLOBALS环境变量
 os.environ.setdefault("FAA_GLOBALS", "core.globals")

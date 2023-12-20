@@ -9,7 +9,7 @@ async def hello(name: str = '') -> str:
     return f'hello {name}'
 
 
-@router.get("/test_sync_db", summary="测试异步数据库操作")
+@router.get("/test_sync_db", summary="测试同步数据库操作")
 def test_sync_db(sess: SyncSess):
     # obj=sess.get(...)
     # do something
